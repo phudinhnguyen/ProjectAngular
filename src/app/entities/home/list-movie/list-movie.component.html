@@ -1,0 +1,115 @@
+<ng-container *ngIf="phimDetail">
+  <section id="ChiTietPhim">
+    <div class="bg-img">
+      <img [src]="phimDetail.hinhAnh" alt="" />
+    </div>
+    <div class="detail-phim d-flex justify-content-center align-items-center container">
+      <div class="img-phim">
+        <img [src]="phimDetail.hinhAnh" alt="" />
+        <div class="trailer">
+          <a [href]="phimDetail.trailer"><i class="fa fa-play" aria-hidden="true"></i></a>
+        </div>
+      </div>
+      <div class="info-phim">
+        <p>{{ phimDetail.ngayKhoiChieu | date: "dd.MM.yyyy" }}</p>
+        <p>{{ phimDetail.tenPhim }}</p>
+        <button class="buyticket">Mua Vé</button>
+      </div>
+      <!-- <div class="danhgia-phim">
+        <div class="c100 p25 big">
+          <span>25%</span>
+          <div class="slice">
+            <div class="bar"></div>
+            <div class="fill"></div>
+          </div>
+        </div>
+      </div> -->
+    </div>
+    <div class="chitietphim-lichChieu">
+      <div class="container">
+        <ul class="nav nav-pills" role="tablist">
+          <li class="nav-item">
+            <a class="nav-link active" data-toggle="pill" href="#lichchieu">Lịch Chiếu</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" data-toggle="pill" href="#info">Thông Tin</a>
+          </li>
+          <!-- <li class="nav-item">
+            <a class="nav-link" data-toggle="pill" href="#danhgia">Đánh Giá</a>
+          </li> -->
+        </ul>
+
+        <!-- Tab panes -->
+        <ng-container *ngIf="cumRap">
+          <div class="tab-content suatchieu">
+            <div id="lichchieu" class="container tab-pane active suatchieu__content">
+              <div class="row">
+                <div class="col-sm-4 content__cumrap">
+                  <ul>
+                    <li *ngFor="let item of cumRap" class="dscumrap" (click)="laymaRap(item.maHeThongRap)">
+                      <img [src]="item.logo" alt="" />
+                      <span>{{ item.tenHeThongRap }}</span>
+                    </li>
+                  </ul>
+                </div>
+                <div class="col-sm-8 content__lichchieu">
+                  <div class="content__date d-flex" *ngIf="date.length != 0;else KhongCoSuatChieu">
+                    <button *ngFor="let item of date; let stt= index" (click)="LayLichChieuTheoNgay(item, stt)"
+                      class='btnLich'>
+                      {{ item | date: "EEE dd" }}
+                    </button>
+                  </div>
+                  <ng-template #KhongCoSuatChieu>
+                    <p>Không Có Suất Chiếu</p>
+                  </ng-template>
+                  <ng-container *ngIf="lichChieuTheoMaRap">
+                    <app-movie *ngIf="DateSelect" [SuatChieu]="lichChieuTheoMaRap" [DateSelected]="DateSelect">
+                    </app-movie>
+                  </ng-container>
+                </div>
+              </div>
+
+            </div>
+            <div id="info" class="container tab-pane fade pt-4">
+              <div class="row">
+                <div class="col-sm-6 info__left">
+                  <table>
+                    <tr>
+                      <td>Tên phim:</td>
+                      <td>{{phimDetail.tenPhim}}</td>
+                    </tr>
+                    <tr>
+                      <td>Ngày phát hành:</td>
+                      <td>{{phimDetail.ngayKhoiChieu | date: "dd MMMM, yyyy"}}</td>
+                    </tr>
+                    <tr>
+                      <td>Đánh giá:</td>
+                      <td>
+                        <ng-container *ngFor="let item of mangDanhGia">
+                          <i class="fas fa-star    "></i>
+                        </ng-container>
+                      </td>
+                    </tr>
+                  </table>
+                </div>
+                <div class="col-sm-6 info__right">
+                  <p>Mô tả:</p>
+                  <p>{{phimDetail.moTa}}</p>
+                </div>
+              </div>
+            </div>
+            <!-- <div id="danhgia" class="container tab-pane fade">
+              <br />
+              <h3>Menu 2</h3>
+              <p>
+                Sed ut perspiciatis unde omnis iste natus error sit voluptatem
+                accusantium doloremque laudantium, totam rem aperiam.
+              </p>
+            </div> -->
+          </div>
+        </ng-container>
+      </div>
+    </div>
+  </section>
+</ng-container>
+<router-outlet></router-outlet>

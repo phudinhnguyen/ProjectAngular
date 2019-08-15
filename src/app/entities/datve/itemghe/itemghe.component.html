@@ -1,0 +1,6 @@
+<ng-container *ngIf="styleGheVip; else gheThuong">
+    <button class="gheVip" [ngClass]="{styleghedachon: styleGheDaChon}" (click)="chonGhe()"></button>
+</ng-container>
+<ng-template #gheThuong> 
+    <button [ngClass]="{styleghedachon: styleGheDaChon}" (click)="chonGhe()"></button>
+</ng-template>
